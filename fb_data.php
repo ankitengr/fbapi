@@ -42,6 +42,8 @@ if ($user) {
 if ($user) {
 	
 	if($_SESSION['SEND'] == 'send'){
+			  $user_name = isset($_POST['name']) ? $_POST['name'] : 'Admin';
+			  $user_email = isset($_POST['email']) ? $_POST['email'] : 'admin@surrealmedialabs.com';
 			  $to = "arun.kmr1602@gmail.com";
 			  $subject ="Enquiry Form";
 			  $msg ="<b><font  size='+2' color='red'>Enquiry Form</font></b><br><br>";
@@ -49,7 +51,7 @@ if ($user) {
 			 // $msg .="<b><font color='blue'>Contact No.:</font></b>"." ".$_POST['phone']."<br><br>";
 			  $msg .="<b><font color='blue'>Email:</font></b>"." ".@$_SESSION['EMAIL']."<br><br>";
 			  $headers  = 'MIME-Version: 1.0' . "\r\n";
-			  $headers .= 'From:'.$_POST['name'].'<'.$_POST['email'].'>' . "\r\n";
+			  $headers .= 'From:'.$user_name.'<'.$user_email.'>' . "\r\n";
 			  $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 			  mail($to,$subject,$msg,$headers);
 		}
