@@ -1,6 +1,6 @@
 <?php
 require 'facebook-php-sdk-master/src/facebook.php';
-
+session_start();
 
 // Create our Application instance (replace this with your appId and secret).
 $facebook = new Facebook(array(
@@ -9,7 +9,8 @@ $facebook = new Facebook(array(
 ));
 
 $user = $facebook->getUser();
-    print_r($user);
+    
+	
  
 if ($user) {
   try {
@@ -18,11 +19,13 @@ if ($user) {
     $fbuname = $user_profile['username'];  // To Get Facebook Username
     $fbfullname = $user_profile['name']; // To Get Facebook full name
     $femail = $user_profile['email'];    // To Get Facebook email ID
+	// $fphone = $user_profile['phone'];    // To Get Facebook email ID
 /* ---- Session Variables -----*/
     $_SESSION['FBID'] = $fbid;          
     $_SESSION['USERNAME'] = $fbuname;
     $_SESSION['FULLNAME'] = $fbfullname;
     $_SESSION['EMAIL'] =  $femail;
+	//$_SESSION['PHONE'] =  $fphone;
     //       checkuser($fbid,$fbuname,$fbfullname,$femail);    // To update local DB
   } catch (FacebookApiException $e) {
     error_log($e);
@@ -32,7 +35,7 @@ if ($user) {
 
 
 if ($user) {
-	echo '<pre>';print_r($user_profile);echo '</pre>';
+	echo '<pre>';print_r($user_profile);echo '</pre>';die;
 	$facebook->destroySession();
 	//header("Location: fb_data.php");
 } else {
